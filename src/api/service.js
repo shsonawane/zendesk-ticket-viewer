@@ -50,7 +50,19 @@ let ticket = function (logger) {
       }
       let response = await request(config.url.requestById(id), logger);
       res.status(200);
-      res.json(response);
+      let item = response.request;
+      res.json(
+        {
+          "id": item.id,
+          "status": item.status,
+          "subject": item.subject,
+          "description": item.description,
+          "created_at": new Date(item.created_at).toLocaleDateString()
+            + " " + new Date(item.created_at).toLocaleTimeString(),
+          "updated_at": new Date(item.updated_at).toLocaleDateString()
+            + " " + new Date(item.updated_at).toLocaleTimeString(),
+        }
+      );
     } catch (error) {
       if (error.response) {
         let errorResponse = error.response;
