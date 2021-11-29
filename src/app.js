@@ -1,9 +1,11 @@
 const express = require('express');
 const path = require('path')
 const morgan = require('morgan');
-const helmet = require('helmet');
 const cors = require('cors');
 const { createLogger, format, transports } = require('winston');
+const middlewares = require('./api/middlewares');
+const service = require('./api/service');
+const app = express();
 const logger = createLogger({
     level: 'debug',
     colorize: true,
@@ -15,9 +17,6 @@ const logger = createLogger({
         new transports.Console()
     ],
 });
-const middlewares = require('./middlewares');
-const tickets = require('./api/tickets');
-const app = express();
 
 //init morgon with winston logger stream to log request.
 app.use(morgan("short", {
@@ -27,9 +26,6 @@ app.use(morgan("short", {
         }
     }
 }));
-
-// using helmet for additional security
-app.use(helmet());
 
 // cors from express API 
 app.use(cors());
@@ -41,7 +37,8 @@ app.use(express.json());
 app.use('/', express.static(path.join(__dirname, 'public')))
 
 //APIs
-app.get('/api/tickets', tickets(logger));
+app.get('/api/tickets', service.list(logger));
+app.get('/api/ticket/:id', service.ticket(logger));
 
 //Middleware to handle errors
 app.use(middlewares.notFound(logger));
