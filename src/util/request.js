@@ -3,10 +3,11 @@ const config = require("../config/zendesk");
 
 /**
  * API helper function. Helper will retry API call as per count.
- * 
- * @param {number} retryCount   API error retry count - default = 3 
- * @param {logger}
- * @returns {any}
+ * @param {string} url                      API url.
+ * @param {import("winston").Logger} logger winston logger object. 
+ * @param {number} retryCount               API error retry count - default = 3 
+ * @returns {JSON}                          Returns api response object. 
+ *                                          Throws exception on API error.
  */
 const apiRequest = async function (url, logger, retryCount = 3) {
     try {

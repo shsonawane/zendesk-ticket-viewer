@@ -5,7 +5,7 @@ const config = require("../config/zendesk");
  * API to fetch ticket list from zendesk.
  * 
  * @param {import("winston").Logger} logger         winston logger object. 
- * @returns {import("connect").SimpleHandleFunction} express simple response handler function.
+ * @returns {import("connect").NextHandleFunction} express next response handler function.
  */
 let list = function (logger) {
   return async function (req, res, next) {
@@ -27,8 +27,15 @@ let list = function (logger) {
           }
         })
       });
-    } catch (e) {
-      next(e);
+    } catch (error) {
+      if (error.response) {
+        let errorResponse = error.response;
+        res.status(errorResponse.status);
+        let errorMessage = errorResponse.data && errorResponse.data.description
+          ? errorResponse.data.description : "Something went wrong";
+        error = new Error(errorMessage);
+      }
+      next(error);
     }
   };
 }

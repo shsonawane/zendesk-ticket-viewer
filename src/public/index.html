@@ -46,12 +46,26 @@
 				'method': "GET",
 				'contentType': 'application/json'
 			}).done(function (res) {
-				$("td#id").text(res.id);
-				$("td#status").text(res.status);
-				$("td#subject").text(res.subject);
-				$("td#description").text(res.description);
-				$("td#created_at").text(res.created_at);
-				$("td#updated_at").text(res.updated_at);
+				$('#ticket-details').dataTable(
+					{
+						"aaData": [res],
+						"columns": [
+							{ data: "id" },
+							{ data: "status" },
+							{ data: "subject" },
+							{ data: "description" },
+							{ data: "created_at" },
+							{ data: "updated_at" },
+						],
+						"paging": false,
+						"autoWidth": true,
+						"pageLength": 25,
+						"lengthChange": false,
+						"ordering": false,
+						"info": false,
+						searching: false
+					}
+				);
 			}).fail(function (jqXHR, status, err) {
 				alert(jqXHR.responseText);
 			});
@@ -74,9 +88,10 @@
 				<input type="number" id="reqId" name="reqId" value="" min="1">
 				<input type="submit" value="Submit">
 			</form>
+			<br>
 			<div id="ticket" class="dataTables_wrapper" role="grid">
-				<table cellpadding="0" cellspacing="0" border="0" class="display dataTable" id="ticket-details" width="100%"
-					aria-describedby="ticket_info" style="width: 100%;">
+				<table cellpadding="0" cellspacing="0" border="0" class="display dataTable" id="ticket-details"
+					width="100%" aria-describedby="ticket_info" style="width: 100%;">
 					<thead>
 						<tr>
 							<th>ID</th>
@@ -89,12 +104,10 @@
 					</thead>
 					<tbody>
 						<tr class="odd">
-							<td id="id"></td>
-							<td id="status"></td>
-							<td id="subject"></td>
-							<td id="description"></td>
-							<td id="created_at"></td>
-							<td id="updated_at"></td>
+							<td valign="top" colspan="6" class="dataTables_empty">
+								Submit a request ID to see details
+								individual ticket details here
+							</td>
 						</tr>
 					</tbody>
 				</table>
@@ -106,8 +119,8 @@
 				<h2>Get all tickets</h2>
 			</div>
 			<div id="ticket_list_wrapper" class="dataTables_wrapper" role="grid">
-				<table cellpadding="0" cellspacing="0" border="0" class="display dataTable" id="ticket_list" width="100%"
-					aria-describedby="ticket_list_info" style="width: 100%;">
+				<table cellpadding="0" cellspacing="0" border="0" class="display dataTable" id="ticket_list"
+					width="100%" aria-describedby="ticket_list_info" style="width: 100%;">
 					<thead>
 						<tr>
 							<th>ID</th>
@@ -126,6 +139,8 @@
 				</table>
 			</div>
 		</div>
+		<footer id="footer">By Shubham Sonawane</footer>
 	</div>
+</body>
 
 </html>
