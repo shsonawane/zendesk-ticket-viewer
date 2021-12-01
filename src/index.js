@@ -1,14 +1,15 @@
 /* eslint-disable no-console */
 const app = require('./app');
 
-let defaultPort = 5000;
+let defaultPort = 9000;
 
 /**
  * Create an app listner at declared port.
  * @returns {function: void}
  */
 const createListener = (port) => app.listen(port, () => {
-  console.log(`\n\nListening: http://localhost:${port}\n\n`);
+  console.log('\n\nOpen this link in browser to view the site\n');
+  console.log(`http://localhost:${port}\n\n`);
 });
 
 /**
