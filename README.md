@@ -13,7 +13,7 @@ An API integrated web application to view zendesk tickets.
 │   ├── config      # Configuration files
 │   ├── public      # Static website source code
 │   └── util        # Reusable utilities/modules
-└── test
+└── test            # Unit tests
 ```
 
 ## Setup
