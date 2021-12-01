@@ -23,7 +23,7 @@ npm install
 
 ## Start Server
 ```
-PORT=<PORT_NUMBER> CRED=<EMAIL_ID>:<PASSWORD> npm start
+PORT=<PORT_NUMBER> CRED='<EMAIL_ID>:<PASSWORD>' npm start
 ```
 *Note:* 
  - If port is not specified then server will start on default port 9000.
