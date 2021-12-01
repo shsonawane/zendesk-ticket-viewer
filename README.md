@@ -1,6 +1,10 @@
 # Zendesk Ticket Viewer
 An api integrated web application to view zendesk tickets.
 
+## Requirements
+    - Latest version of npm.
+    - Latest version of nodejs
+
 ## Setup
 ```
 npm install
