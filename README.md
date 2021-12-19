@@ -28,7 +28,6 @@ PORT=<PORT_NUMBER> CRED='<EMAIL_ID>:<PASSWORD>' npm start
 *Note:* 
  - If port is not specified then server will start on default port 9000.
  - If credentials are not specified then program will read credentials from `src/config/credentials` config file (by default file has no credentials).
- - I will be sharing credentials over email.
 
 Running above command will start serve and display following output
 ```
